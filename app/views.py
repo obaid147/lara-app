@@ -130,7 +130,7 @@ def update(request, pk):
             return render(request, 'app/index.html', {'fields': all_fields})
 
     if len(set_source) > 1:
-        """ if it is not just from dropdown"""
+        """ if it is not just from dropdown """
         first = set_source[0]
         sec = set_source[2]
         third = set_source[4]
@@ -156,7 +156,8 @@ def delete(request, pk):
 def follow_up_form(request):
     form = FollowUpForm()
     """
-    Model FORM an html form where user can select a person, and fill all other fields and store it in database
+    Model FORM an html form where user can select a person
+    and fill all other fields and store it in database
     """
     if request.method == 'POST':
         form = FollowUpForm(request.POST)
@@ -207,7 +208,7 @@ def follow_up_detail(request, pk):
 
 @login_required(login_url='login')
 def follow_up_delete(request, pk):
-    """ Deleting a particular entry"""
+    """ Deleting a particular entry from followup """
     enquiry = FollowUp.objects.get(id=pk)
     if request.method == 'POST':
         enquiry.delete()
@@ -217,6 +218,9 @@ def follow_up_delete(request, pk):
 
 
 def login_form(request):
+    """
+    User login
+    """
     if request.user.is_authenticated:
         return redirect("/")
     username = request.POST.get('username')
@@ -224,10 +228,7 @@ def login_form(request):
     if request.method == 'POST':
         user = authenticate(request, username=username, password=password)
 
-        # if username == 'a' and password == 'a':
-        #     messages.success(request, 'Welcome RameshSir.')
         if user is not None:
-            # u-> lara # p-> lara
             login(request, user)
             messages.success(request, "Welcome Sir!")
             return redirect("/")
@@ -238,5 +239,6 @@ def login_form(request):
 
 
 def logout_user(request):
+    """ logout user """
     logout(request)
     return redirect('login')

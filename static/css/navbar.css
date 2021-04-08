@@ -1,0 +1,6 @@
+.image{
+    opacity: 60%;
+  }
+  .image:hover{
+    opacity: 100%;
+  }

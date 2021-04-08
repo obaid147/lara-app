@@ -1,0 +1,37 @@
+{% block nav %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/laralogo.png' %}" class="image"
+                                                        alt="logo" width="150" height="50" style="margin-left: 50px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'form' %}" style="font-family: Ink Free; font-size: 22px; margin-left: 50px;">
+        NEW-Student</a>
+    </div>
+
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'followup' %}" style="font-family: Ink Free; font-size: 22px; margin-left: 50px;">
+        NEW-FollowUp</a>
+    </div>
+
+    <div class="navbar-nav">
+      <a class="nav-item nav-link" href="{% url 'followupall' %}" style="font-family: Ink Free; font-size: 22px; margin-left: 50px;">
+        ALL-FollowUp's</a>
+    </div>
+
+    <span>
+      <a class="nav-item nav-link" href="{% url 'logout' %}" style="font-family: Ink Free; font-size: 22px; margin-left: 50px;">
+        logout ({{ request.user }})</a>
+    </span>
+
+  </div>
+</nav>
+<br>
+{% endblock nav %}
+
+
+

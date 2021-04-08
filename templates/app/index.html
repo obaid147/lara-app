@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Info</title>
+</head>
+<body>
+{% include 'app/navbar.html' %}
+<center>
+    {% if messages %}
+		{% for message in messages %}
+		  <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+			{{ message }}
+		  </div>
+		{% endfor %}
+	{% endif %}
+    <div class="search_count">
+        <h2>
+            <a href="{% url 'index' %}" style="text-decoration: none;">Home</a>
+        </h2>
+    </div>
+    <form method="get">
+        <div class="form-col">
+            <div class="form-group col-5">
+                <div class="input-group">
+                    <input class="form-control py-2" name="q" placeholder="Search By Name, Email or University/College" required>
+                    <span class="input-group-append">
+                        <div class="input-group-text">
+                            <button type="submit" class="btn btn-outline-primary btn-lg fa fa-search"></button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<hr>
+<div class="search_count">
+Total Entries: {{ total_count }}
+</div>
+
+<hr>
+<table class="table table-striped table-hover table-bordered" id="userTable">
+  <thead>
+    <tr class="table-dark">
+        <th></th>
+        <th scope="col">Name</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Passout</th>
+        <th scope="col">Latest_education</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Percentages</th>
+        <th scope="col">University/College</th>
+        <th scope="col">State</th>
+        <th scope="col">Source</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Submission Date</th>
+        <th scope="col">Appointment Date</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for field in fields %}
+        <tr>
+            <td>{{ field.id }}</td>
+            <td>{{ field.name }}</td>
+            <td>{{ field.mobile }}</td>
+            <td>{{ field.email }}</td>
+            <td>{{ field.pass_out_Year }}</td>
+            <td>{{ field.latest_education }}</td>
+            <td>{{ field.branch }}</td>
+            <td>{{ field.percentages }}</td>
+            <td>{{ field.university_or_college }}</td>
+            <td>{{ field.state }}</td>
+            <td>{{ field.source }}</td>
+            <td>{{ field.Gender }}</td>
+            <td>{{ field.date }}</td>
+            <td>{{ field.appointment_date }}</td>
+            <td>
+                <a href="{% url 'update' field.id %}" class="btn btn-outline-success btn-sm">
+                    <i class="fa fa-edit"></i>
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'index' %}" onclick="return popitup('/delete/{{ field.id }}')"
+                class="btn btn-outline-danger btn-sm"><i class="fa fa-trash-o"></i></a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+          <td colspan="16" class="text-center bg-warning">No Data Found</td>
+        </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+</center>
+
+<!--BS-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+
+<script language="javascript" type="text/javascript">
+function popitup(url) {
+    newwindow=window.open(url,'{{fields.name}}','height=100, width=300, top=200, left=1250');
+    if (window.focus) {
+    newwindow.focus()
+    }
+    return false;
+}
+</script>
+<!--<link rel="script" href="{% static 'js/index.js' %}">-->
+
+</body>
+</html>

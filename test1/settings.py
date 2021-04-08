@@ -29,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 't%9=lx5u*g32g=-*%o*oi(cf*eku+2sz(l0+fbuei(__b6qg5z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-lara.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
